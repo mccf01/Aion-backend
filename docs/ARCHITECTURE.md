@@ -79,7 +79,7 @@ src/
 │   ├── auth/
 │   ├── usuarios/
 │   ├── locais/
-│   ├── programacoes/
+│   ├── pontos/
 │   ├── escalas/
 │   ├── agendamentos/
 │   └── ...
@@ -182,7 +182,6 @@ Exemplos:
 * login
 * geração de escalas
 * gerenciamento de agendamentos
-* recorrência
 * validações
 * regras administrativas
 * autorização contextual
@@ -281,7 +280,7 @@ Exemplo:
 * Auth
 * Usuários
 * Locais
-* Programações
+* Pontos
 * Escalas
 * Agendamentos
 
@@ -407,7 +406,5 @@ Caso seja necessária uma alteração estrutural significativa, a decisão deve 
 * DOMAIN.md
 * DATABASE.md
 * SECURITY.md
-* API.md
-* DECISIONS.md
 * AGENTS.md
 * README.md

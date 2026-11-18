@@ -10,7 +10,7 @@ O projeto foi desenvolvido com foco em boas práticas de desenvolvimento, arquit
 
 # Objetivos
 
-O Aion tem como objetivo facilitar o gerenciamento das escalas de Testemunho Público de uma congregação, permitindo que administradores organizem programações, locais e voluntários de forma simples, segura e eficiente.
+O Aion tem como objetivo facilitar o gerenciamento das escalas de Testemunho Público de uma congregação, permitindo que administradores organizem locais e voluntários de forma simples, segura e eficiente.
 
 Além das funcionalidades do sistema, o projeto busca demonstrar conhecimentos em:
 
@@ -83,7 +83,7 @@ Cada camada possui uma responsabilidade única, facilitando manutenção, testes
 * Controle de acesso (RBAC)
 * Cadastro de Usuários
 * Cadastro de Locais
-* Cadastro de Programações
+* Cadastro de Pontos
 * Escalas recorrentes
 * Controle de permissões
 * Recuperação de senha
@@ -131,7 +131,7 @@ package.json
 ## 1. Clonar o repositório
 
 ```bash
-git clone <url-do-repositorio>
+git clone <https://github.com/mccf01/CA-backend.git>
 ```
 
 ## 2. Instalar dependências

@@ -343,8 +343,6 @@ O sistema deverá possuir uma rotina automatizada de limpeza de dados, executada
 
 A rotina deverá identificar registros cuja referência temporal seja igual ou superior a três meses de antiguidade, considerando a data atual como referência.
 
-Dados operacionais que já não possuem utilidade após esse período poderão ser removidos definitivamente através de Hard Delete.
-
 Entre os registros sujeitos à limpeza estão:
 
 - Agendamentos antigos, cuja data de realização ultrapassou o período de retenção.
@@ -392,7 +390,6 @@ Ao criar novas entidades:
 - Utilizar nomes consistentes.
 - Evitar redundância.
 - Documentar alterações relevantes.
-- Avaliar a necessidade de Soft Delete ou Hard Delete.
 - Preservar a integridade referencial.
 
 ---

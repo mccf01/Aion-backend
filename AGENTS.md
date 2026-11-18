@@ -211,7 +211,7 @@ Responsável pela utilização comum do sistema.
 Pode:
 
 - consultar suas escalas
-- consultar programações
+- consultar escalas
 - atualizar seu próprio perfil
 - confirmar participação
 - cancelar participação quando permitido
@@ -228,6 +228,9 @@ Na primeira release, possui as mesmas permissões operacionais do ANCIÃO para o
 
 Pode:
 
+- criar Pontos
+- editar Pontos
+- excluir Pontos
 - criar escalas
 - editar escalas
 - remover escalas

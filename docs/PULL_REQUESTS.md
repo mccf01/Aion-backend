@@ -298,3 +298,74 @@ O revisor deve verificar todos os itens antes da aprovação.
 - [ ] Não existem riscos de IDOR.
 - [ ] Nenhuma informação sensível pode ser exposta.
 - [ ] Não existem segredos versionados
+
+- [ ] Não existem segredos versionados.
+
+---
+
+## Banco de Dados
+
+Caso aplicável.
+
+- [ ] Alterações fazem sentido.
+- [ ] Migrations estão corretas.
+- [ ] Relacionamentos permanecem consistentes.
+
+---
+
+## Testes
+
+- [ ] Build executado com sucesso.
+- [ ] Testes aprovados.
+- [ ] Casos críticos continuam funcionando.
+
+---
+
+## Documentação
+
+- [ ] A documentação continua consistente.
+- [ ] Novas funcionalidades foram documentadas quando necessário.
+
+---
+
+## Aprovação
+
+O Pull Request somente poderá ser aprovado quando:
+
+- [ ] Todos os itens deste documento estiverem atendidos.
+- [ ] Não existirem comentários pendentes.
+- [ ] Não existirem conflitos.
+- [ ] O código estiver pronto para produção.
+
+---
+
+# O que NÃO deve entrar em um Pull Request
+
+Evite incluir no mesmo PR:
+
+- Novas funcionalidades e refatorações sem relação.
+- Alterações de formatação em arquivos não relacionados.
+- Mudanças de arquitetura sem documentação.
+- Dependências não justificadas.
+- Código experimental.
+- Código comentado.
+- Arquivos temporários.
+- Logs de depuração.
+
+---
+
+# Filosofia do Projeto
+
+Este projeto prioriza:
+
+- Código limpo.
+- Arquitetura consistente.
+- Segurança.
+- Simplicidade.
+- Baixo acoplamento.
+- Alta coesão.
+- Evolução incremental.
+
+Sempre prefira um Pull Request pequeno, bem documentado e fácil de revisar do que uma grande entrega difícil de entender.
+
+A qualidade do código possui prioridade sobre a velocidade de implementação.
