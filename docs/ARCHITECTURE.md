@@ -1,8 +1,10 @@
-# Arquitetura do Sistema
+# Aion - Arquitetura do Sistema
+
+> Beyond the Ordinary
 
 ## Objetivo
 
-Este documento descreve a arquitetura adotada no backend do Projeto Carrinho, apresentando as responsabilidades de cada camada, o fluxo de uma requisição, os princípios arquiteturais utilizados e as boas práticas que devem ser seguidas durante o desenvolvimento.
+Este documento descreve a arquitetura adotada no backend do Aion, apresentando as responsabilidades de cada camada, o fluxo de uma requisição, os princípios arquiteturais utilizados e as boas práticas que devem ser seguidas durante o desenvolvimento.
 
 O objetivo é garantir que o projeto permaneça organizado, escalável e de fácil manutenção conforme novas funcionalidades forem sendo implementadas.
 
@@ -10,7 +12,7 @@ O objetivo é garantir que o projeto permaneça organizado, escalável e de fác
 
 # Visão Geral
 
-O Projeto Carrinho utiliza uma arquitetura em camadas (Layered Architecture), organizada por responsabilidades.
+O Aion utiliza uma arquitetura em camadas (Layered Architecture), organizada por responsabilidades.
 
 Cada camada possui apenas uma função específica e não deve assumir responsabilidades pertencentes a outras partes do sistema.
 
@@ -75,10 +77,11 @@ src/
 
 ├── modules/
 │   ├── auth/
-│   ├── users/
+│   ├── usuarios/
 │   ├── locais/
-│   ├── programacoes/
+│   ├── pontos/
 │   ├── escalas/
+│   ├── agendamentos/
 │   └── ...
 │
 ├── middlewares/
@@ -110,6 +113,8 @@ usuarios/
 └── index.ts
 ```
 
+Os nomes das camadas e estruturas técnicas seguem a convenção em inglês, enquanto os módulos que representam conceitos específicos do domínio podem utilizar nomes em português.
+
 Essa organização permite que novas funcionalidades sejam adicionadas sem impactar os demais módulos.
 
 ---
@@ -133,13 +138,15 @@ Os middlewares executam tarefas comuns antes que a requisição alcance o Contro
 Exemplos:
 
 * autenticação
-* autorização
+* autorização geral baseada em papéis e permissões
 * validação
 * tratamento de erros
 * rate limiting
 * logging
 
 Cada middleware deve possuir apenas uma responsabilidade.
+
+A autorização geral deve ser realizada nesta camada, enquanto validações contextuais de acesso aos recursos permanecem sob responsabilidade dos Services.
 
 ---
 
@@ -159,6 +166,7 @@ Controllers não devem:
 * acessar o banco
 * utilizar Prisma
 * implementar regras de negócio
+* realizar autenticação ou autorização
 * validar permissões complexas
 
 ---
@@ -173,9 +181,11 @@ Exemplos:
 * cadastro
 * login
 * geração de escalas
-* recorrência
+* gerenciamento de agendamentos
 * validações
 * regras administrativas
+* autorização contextual
+* validação de propriedade dos recursos e prevenção contra IDOR
 
 Sempre que existir uma regra de negócio, ela deve ficar nesta camada.
 
@@ -189,9 +199,9 @@ Repositories são responsáveis pelo acesso aos dados.
 
 Apenas esta camada pode utilizar o Prisma ORM.
 
-Repositories não devem conter regras de negócio.
+Repositories não devem conter regras de negócio nem decisões de autorização.
 
-Sua única responsabilidade é persistência de dados.
+Sua única responsabilidade é persistência e recuperação de dados.
 
 ---
 
@@ -270,12 +280,20 @@ Exemplo:
 * Auth
 * Usuários
 * Locais
-* Programações
+* Pontos
 * Escalas
+* Agendamentos
 
 Cada módulo possui sua própria estrutura interna.
 
-Isso reduz acoplamento e facilita manutenção.
+Os módulos `escalas` e `agendamentos` possuem responsabilidades distintas:
+
+* **Escalas:** representam as disponibilidades organizadas pelo sistema, envolvendo locais, pontos, datas e horários disponíveis para agendamento.
+* **Agendamentos:** representam as reservas realizadas pelos usuários sobre as disponibilidades existentes nas escalas, incluindo participantes e gerenciamento dessas reservas.
+
+Os módulos podem precisar interagir entre si, mas devem respeitar as responsabilidades de cada camada e evitar acoplamento desnecessário.
+
+Essa organização reduz o acoplamento e facilita a manutenção.
 
 ---
 
@@ -337,6 +355,12 @@ As principais estratégias incluem:
 
 Cada camada participa da estratégia de segurança respeitando sua responsabilidade.
 
+Middlewares realizam autenticação e verificações gerais de permissões.
+
+Services realizam verificações contextuais de autorização, propriedade dos recursos e prevenção contra IDOR.
+
+Repositories permanecem responsáveis exclusivamente pelo acesso aos dados.
+
 ---
 
 # Escalabilidade
@@ -382,7 +406,5 @@ Caso seja necessária uma alteração estrutural significativa, a decisão deve 
 * DOMAIN.md
 * DATABASE.md
 * SECURITY.md
-* API.md
-* DECISIONS.md
 * AGENTS.md
 * README.md

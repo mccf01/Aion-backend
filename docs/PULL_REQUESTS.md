@@ -1,8 +1,10 @@
-# Pull Requests
+# Aion - Pull Requests
+
+> Beyond the Ordinary
 
 ## Objetivo
 
-Este documento define o padrão para criação, revisão e aprovação de Pull Requests do Projeto Carrinho.
+Este documento define o padrão para criação, revisão e aprovação de Pull Requests do Aion.
 
 Todo Pull Request deve representar uma entrega pequena, objetiva e alinhada com a arquitetura do projeto.
 
@@ -23,13 +25,13 @@ Todo Pull Request deve seguir os seguintes princípios:
 
 Sempre que possível:
 
-```
+```text
 1 Card
-↓
+   ↓
 1 Branch
-↓
+   ↓
 1 Pull Request
-↓
+   ↓
 1 Merge
 ```
 
@@ -47,7 +49,7 @@ Utilizar nomes descritivos.
 
 Exemplos:
 
-```
+```text
 feature/ISSUE-{id da issue}
 ```
 
@@ -59,7 +61,7 @@ Utilizar títulos curtos e objetivos.
 
 Exemplos:
 
-```
+```text
 Implementa autenticação JWT
 
 Cria Repository de Usuários
@@ -84,7 +86,7 @@ Todo Pull Request deve informar:
 
 Modelo:
 
-```
+```text
 ## Objetivo
 
 Implementar autenticação utilizando JWT.
@@ -131,19 +133,19 @@ Antes de solicitar revisão, confirme todos os itens abaixo.
 
 - [ ] O fluxo da aplicação respeita a arquitetura.
 
-```
+```text
 Routes
-↓
+   ↓
 Middlewares
-↓
+   ↓
 Controllers
-↓
+   ↓
 Services
-↓
+   ↓
 Repositories
-↓
+   ↓
 Prisma
-↓
+   ↓
 PostgreSQL
 ```
 
@@ -158,7 +160,7 @@ PostgreSQL
 
 - [ ] O módulo segue o padrão do projeto.
 
-```
+```text
 module/
 
 controllers/
@@ -182,9 +184,9 @@ types/
 - [ ] Não existe duplicação desnecessária.
 - [ ] Métodos possuem apenas uma responsabilidade.
 - [ ] Variáveis possuem nomes claros.
-- [ ] Não utilizei "any".
+- [ ] Não utilizei `any`.
 - [ ] Não utilizei código morto.
-- [ ] Não deixei console.log desnecessários.
+- [ ] Não deixei `console.log` desnecessários.
 
 ---
 
@@ -216,13 +218,13 @@ Caso aplicável.
 
 - [ ] Projeto compila.
 
-```
+```bash
 npm run build
 ```
 
 - [ ] Todos os testes passaram.
 
-```
+```bash
 npm test
 ```
 
@@ -295,6 +297,8 @@ O revisor deve verificar todos os itens antes da aprovação.
 - [ ] Não existem falhas óbvias de autenticação.
 - [ ] Não existem riscos de IDOR.
 - [ ] Nenhuma informação sensível pode ser exposta.
+- [ ] Não existem segredos versionados
+
 - [ ] Não existem segredos versionados.
 
 ---

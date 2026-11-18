@@ -1,7 +1,7 @@
 
 # Card Templates
 
-Este diretório contém os templates oficiais utilizados para criação de **Issues** do Projeto Carrinho.
+Este diretório contém os templates oficiais utilizados para criação de **Issues** do Aion.
 
 O objetivo destes modelos é padronizar a criação dos Cards, garantindo consistência na documentação, rastreabilidade das tarefas e um fluxo de desenvolvimento organizado.
 

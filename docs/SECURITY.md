@@ -1,8 +1,10 @@
-# Segurança
+# Aion - Segurança
+
+> Beyond the Ordinary
 
 ## Objetivo
 
-Este documento descreve a arquitetura de segurança adotada pelo Projeto Carrinho.
+Este documento descreve a arquitetura de segurança adotada pelo Aion.
 
 Seu objetivo é documentar as estratégias utilizadas para proteger a aplicação, seus usuários e seus dados, além de estabelecer diretrizes para futuras implementações.
 
@@ -12,17 +14,17 @@ Segurança é considerada um requisito funcional do projeto e não uma funcional
 
 # Filosofia de Segurança
 
-O Projeto Carrinho adota o princípio de **Security by Design**.
+O Aion adota o princípio de **Security by Design**.
 
 Isso significa que mecanismos de segurança são considerados desde a arquitetura da aplicação e não apenas adicionados após a implementação das funcionalidades.
 
 Toda nova funcionalidade deve responder às seguintes perguntas antes de ser implementada:
 
-* Quem poderá acessar?
-* Quais dados serão manipulados?
-* Existe risco de exposição de informações?
-* Existe risco de alteração indevida?
-* Existe risco de abuso da funcionalidade?
+- Quem poderá acessar?
+- Quais dados serão manipulados?
+- Existe risco de exposição de informações?
+- Existe risco de alteração indevida?
+- Existe risco de abuso da funcionalidade?
 
 ---
 
@@ -30,12 +32,12 @@ Toda nova funcionalidade deve responder às seguintes perguntas antes de ser imp
 
 As decisões de segurança seguem os seguintes princípios:
 
-* Menor privilégio possível (Least Privilege)
-* Defesa em profundidade (Defense in Depth)
-* Falha segura (Fail Secure)
-* Validação de toda entrada de dados
-* Autorização explícita
-* Não confiar em dados enviados pelo cliente
+- Menor privilégio possível (Least Privilege)
+- Defesa em profundidade (Defense in Depth)
+- Falha segura (Fail Secure)
+- Validação de toda entrada de dados
+- Autorização explícita
+- Não confiar em dados enviados pelo cliente
 
 ---
 
@@ -57,10 +59,10 @@ Os cookies utilizados para autenticação devem possuir configurações adequada
 
 Em produção:
 
-* HttpOnly
-* Secure
-* SameSite
-* Expiração controlada
+- HttpOnly
+- Secure
+- SameSite
+- Expiração controlada
 
 O cliente nunca deve manipular diretamente o conteúdo do JWT.
 
@@ -74,10 +76,10 @@ Cada usuário possui um papel definido.
 
 Exemplo:
 
-* PUBLICADOR
-* SERVO
-* ANCIAO
-* ROOT
+- PUBLICADOR
+- SERVO
+- ANCIAO
+- ROOT
 
 As permissões são verificadas antes da execução das regras de negócio.
 
@@ -93,9 +95,9 @@ O sistema deve impedir acessos indevidos a recursos pertencentes a outros usuár
 
 Toda consulta baseada em identificadores deve validar:
 
-* usuário autenticado
-* permissões
-* propriedade do recurso
+- usuário autenticado
+- permissões
+- propriedade do recurso
 
 Nunca confiar apenas no ID enviado pelo cliente.
 
@@ -149,10 +151,10 @@ Rotas sensíveis devem possuir limitação de requisições.
 
 Especial atenção para:
 
-* Login
-* Recuperação de senha
-* Alteração de senha
-* Cadastro
+- Login
+- Recuperação de senha
+- Alteração de senha
+- Cadastro
 
 O objetivo é reduzir ataques automatizados e tentativas de força bruta.
 
@@ -174,9 +176,9 @@ Mensagens de erro não devem revelar detalhes internos da aplicação.
 
 Em ambiente de produção:
 
-* Não expor stack traces.
-* Não retornar consultas SQL.
-* Não retornar detalhes internos do servidor.
+- Não expor stack traces.
+- Não retornar consultas SQL.
+- Não retornar detalhes internos do servidor.
 
 Logs detalhados devem permanecer disponíveis apenas para desenvolvimento e administração.
 
@@ -188,11 +190,11 @@ A arquitetura prevê a utilização de Middlewares específicos para segurança.
 
 Exemplos:
 
-* Autenticação
-* Autorização
-* Rate Limiting
-* Validação
-* Tratamento global de erros
+- Autenticação
+- Autorização
+- Rate Limiting
+- Validação
+- Tratamento global de erros
 
 Cada Middleware possui apenas uma responsabilidade.
 
@@ -204,10 +206,10 @@ Eventos relevantes poderão ser registrados para fins de auditoria.
 
 Exemplos:
 
-* Login
-* Logout
-* Alterações administrativas
-* Erros críticos
+- Login
+- Logout
+- Alterações administrativas
+- Erros críticos
 
 Logs nunca devem conter informações sensíveis.
 
@@ -219,10 +221,10 @@ Informações sensíveis nunca devem ser armazenadas diretamente no código-font
 
 Exemplos:
 
-* JWT Secret
-* Credenciais do Banco
-* Configurações SMTP
-* Chaves de API
+- JWT Secret
+- Credenciais do Banco
+- Configurações SMTP
+- Chaves de API
 
 Todas essas informações devem ser obtidas através de variáveis de ambiente.
 
@@ -234,10 +236,10 @@ As dependências do projeto devem permanecer atualizadas.
 
 Novas bibliotecas devem ser avaliadas considerando:
 
-* manutenção
-* comunidade
-* histórico de vulnerabilidades
-* necessidade real
+- manutenção
+- comunidade
+- histórico de vulnerabilidades
+- necessidade real
 
 Evitar dependências desnecessárias reduz a superfície de ataque da aplicação.
 
@@ -269,30 +271,30 @@ Cookies utilizam configurações de segurança mais restritivas.
 
 ## Middlewares
 
-* Autenticação
-* Autorização
-* Validação inicial
+- Autenticação
+- Autorização
+- Validação inicial
 
 ---
 
 ## Services
 
-* Regras de autorização
-* Validação de propriedade
-* Regras de negócio
+- Regras de autorização
+- Validação de propriedade
+- Regras de negócio
 
 ---
 
 ## Repositories
 
-* Persistência segura
-* Comunicação com Prisma
+- Persistência segura
+- Comunicação com Prisma
 
 ---
 
 ## Prisma
 
-* Comunicação com PostgreSQL
+- Comunicação com PostgreSQL
 
 ---
 
@@ -300,14 +302,14 @@ Cookies utilizam configurações de segurança mais restritivas.
 
 Antes de concluir qualquer funcionalidade, verificar:
 
-* O usuário está autenticado?
-* O usuário possui permissão?
-* Existe risco de IDOR?
-* Todos os dados foram validados?
-* Existem informações sensíveis sendo expostas?
-* Há possibilidade de abuso por força bruta?
-* Os erros estão sendo tratados corretamente?
-* As variáveis sensíveis estão protegidas?
+- O usuário está autenticado?
+- O usuário possui permissão?
+- Existe risco de IDOR?
+- Todos os dados foram validados?
+- Existem informações sensíveis sendo expostas?
+- Há possibilidade de abuso por força bruta?
+- Os erros estão sendo tratados corretamente?
+- As variáveis sensíveis estão protegidas?
 
 ---
 
@@ -321,9 +323,7 @@ Novas funcionalidades devem revisar este documento sempre que introduzirem novos
 
 # Documentos Relacionados
 
-* ARCHITECTURE.md
-* DOMAIN.md
-* DATABASE.md
-* AUTHENTICATION.md
-* API.md
-* AGENTS.md
+- ARCHITECTURE.md
+- DOMAIN.md
+- DATABASE.md
+- AGENTS.md
