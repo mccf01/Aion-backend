@@ -101,8 +101,8 @@ Exemplos:
 - cadastro
 - login
 - recuperação de senha
-- regras de recorrência
-- geração de escalas
+- regras de agendamento
+- gerenciamento de disponibilidades
 - validação de datas
 - verificação de conflitos
 - autorização baseada em RBAC, quando depender do contexto da operação
@@ -210,11 +210,11 @@ Responsável pela utilização comum do sistema.
 
 Pode:
 
-- consultar suas escalas
-- consultar escalas
+- consultar escalas e disponibilidades
+- realizar agendamentos
+- responder a convites recebidos, aceitando ou recusando
+- participar de agendamentos mediante convite aceito
 - atualizar seu próprio perfil
-- confirmar participação
-- cancelar participação quando permitido
 
 Não pode acessar funcionalidades administrativas.
 
@@ -224,7 +224,7 @@ Não pode acessar funcionalidades administrativas.
 
 Possui todas as permissões do PUBLICADOR.
 
-Na primeira release, possui as mesmas permissões operacionais do ANCIÃO para o gerenciamento de escalas.
+Na primeira release, possui as mesmas permissões operacionais do ANCIÃO para o gerenciamento de escalas, locais e disponibilidades.
 
 Pode:
 
@@ -234,9 +234,12 @@ Pode:
 - criar escalas
 - editar escalas
 - remover escalas
+- cadastrar e gerenciar disponibilidades, incluindo datas e horários
 - criar e editar usuários
 - gerenciar locais
 - executar tarefas administrativas delegadas
+
+O cadastro e gerenciamento de disponibilidades consiste em registrar e administrar os horários disponíveis nas escalas. O estado de cada horário, como livre ou reservado, é determinado automaticamente pelo sistema conforme a existência de um Agendamento associado. SERVO e ANCIÃO não definem manualmente esse estado.
 
 Não pode:
 
@@ -255,7 +258,7 @@ Além disso, pode:
 
 - remover ou desativar usuários
 
-Na primeira release, possui as mesmas permissões operacionais do SERVO para o gerenciamento de escalas e locais.
+Na primeira release, possui as mesmas permissões operacionais do SERVO para o gerenciamento de escalas, locais e disponibilidades.
 
 Funcionalidades administrativas mais complexas poderão ser disponibilizadas exclusivamente ao ANCIÃO conforme a evolução do sistema.
 
@@ -315,7 +318,7 @@ PUBLICADOR acessa apenas recursos autorizados.
 
 SERVO possui acesso administrativo limitado.
 
-ANCIAO possui acesso administrativo completo sobre o domínio.
+ANCIÃO possui acesso administrativo completo sobre o domínio.
 
 ROOT possui acesso aos recursos e funcionalidades do sistema.
 
@@ -406,7 +409,15 @@ Caso seja necessário:
 - executar prisma generate
 - criar migration quando apropriado
 
-Nunca apagar dados automaticamente.
+Não realizar exclusões automáticas de dados fora das rotinas de retenção expressamente definidas e autorizadas.
+
+O Aion possui uma rotina trimestral de retenção que realiza a exclusão permanente de registros operacionais com pelo menos três meses de antiguidade, incluindo Disponibilidades, Agendamentos e registros dependentes elegíveis, além de logs técnicos antigos.
+
+A Escala é uma estrutura persistente associada ao Ponto e não deve ser removida por essa rotina apenas pela passagem do tempo.
+
+Registros de auditoria possuem finalidade e política de retenção distintas dos logs técnicos e não devem ser tratados como equivalentes.
+
+Qualquer exclusão automática deve respeitar a política de retenção documentada no projeto. Não excluir outros dados automaticamente.
 
 ---
 

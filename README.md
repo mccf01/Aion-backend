@@ -131,7 +131,7 @@ package.json
 ## 1. Clonar o repositório
 
 ```bash
-git clone <https://github.com/mccf01/CA-backend.git>
+git clone https://github.com/mccf01/CA-backend.git
 ```
 
 ## 2. Instalar dependências
