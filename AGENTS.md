@@ -1,16 +1,18 @@
-# QWEN.md
+# Aion - Instruções para Agentes de IA
 
-# Projeto Carrinho - Instruções para Agentes de IA
+> Beyond the Ordinary
 
 ## Objetivo
 
-Este projeto é um sistema backend para gerenciamento de escalas de Testemunho Público.
+Este projeto é o backend do Aion, um sistema para gerenciamento de escalas de Testemunho Público.
 
 O objetivo é manter uma arquitetura limpa, modular, segura e de fácil manutenção.
 
 A IA deve priorizar qualidade, legibilidade, segurança e consistência arquitetural acima da velocidade de implementação.
 
 Sempre respeite os padrões já existentes no projeto.
+
+A identidade oficial do projeto é **Aion — Beyond the Ordinary**. Ao trabalhar com documentações institucionais ou elementos de apresentação do sistema, respeite essa identidade.
 
 ---
 
@@ -44,19 +46,19 @@ O projeto utiliza arquitetura em camadas.
 
 Toda requisição deve seguir obrigatoriamente o fluxo abaixo.
 
-```
+```text
 Routes
-    ↓
+   ↓
 Middlewares
-    ↓
+   ↓
 Controllers
-    ↓
+   ↓
 Services
-    ↓
+   ↓
 Repositories
-    ↓
+   ↓
 Prisma ORM
-    ↓
+   ↓
 PostgreSQL
 ```
 
@@ -103,8 +105,9 @@ Exemplos:
 - geração de escalas
 - validação de datas
 - verificação de conflitos
-- autorização baseada em RBAC
+- autorização baseada em RBAC, quando depender do contexto da operação
 - prevenção de IDOR
+- validação de propriedade dos recursos
 
 Sempre que possível, Services devem ser independentes do Express.
 
@@ -122,7 +125,7 @@ Nunca utilize Prisma diretamente em:
 
 Repositories devem conter apenas acesso aos dados.
 
-Não coloque regras de negócio nesta camada.
+Não coloque regras de negócio ou decisões de autorização nesta camada.
 
 ---
 
@@ -137,6 +140,16 @@ Exemplos:
 - validation.middleware.ts
 - error.middleware.ts
 - rateLimit.middleware.ts
+
+Responsabilidades relacionadas à segurança:
+
+- autenticação das requisições
+- verificação geral de permissões e papéis
+- validação de entradas
+- tratamento global de erros
+- limitação de requisições
+
+Regras de autorização que dependam do contexto da operação, como propriedade de recursos e prevenção de IDOR, devem ser verificadas nos Services.
 
 Evite Middlewares específicos para entidades.
 
@@ -211,53 +224,75 @@ Não pode acessar funcionalidades administrativas.
 
 Possui todas as permissões do PUBLICADOR.
 
-Além disso pode:
+Na primeira release, possui as mesmas permissões operacionais do ANCIÃO para o gerenciamento de escalas.
+
+Pode:
 
 - criar escalas
 - editar escalas
 - remover escalas
+- criar e editar usuários
 - gerenciar locais
 - executar tarefas administrativas delegadas
 
 Não pode:
 
-- criar programações
-- alterar recorrências
-- definir horários das programações
+- remover ou desativar usuários
+- acessar funcionalidades exclusivas de administração técnica do sistema
+
+As permissões do SERVO poderão ser modificadas, ampliadas ou restringidas conforme a evolução do Aion e a implementação de novas funcionalidades.
 
 ---
 
-## ANCIAO
+## ANCIÃO
 
 Possui todas as permissões do SERVO.
 
-Além disso pode:
+Além disso, pode:
 
-- criar programações
-- editar programações
-- remover programações
-- definir horários
-- configurar recorrências
-- gerenciar usuários
+- remover ou desativar usuários
+
+Na primeira release, possui as mesmas permissões operacionais do SERVO para o gerenciamento de escalas e locais.
+
+Funcionalidades administrativas mais complexas poderão ser disponibilizadas exclusivamente ao ANCIÃO conforme a evolução do sistema.
 
 ---
 
 ## ROOT
 
-Possui acesso total ao sistema.
+Possui todas as permissões do ANCIÃO, além de acesso às funcionalidades de administração técnica da plataforma.
 
-Destina-se exclusivamente à administração técnica da plataforma.
+Destina-se exclusivamente à administração técnica e ao gerenciamento completo do Aion.
 
 Pode:
 
-- acessar telas de configuração
-- alterar parâmetros globais
-- gerenciar configurações do sistema
+- acessar todas as funcionalidades do sistema
+- acessar telas e recursos de administração técnica
+- alterar parâmetros globais e configurações da plataforma
+- gerenciar configurações relacionadas ao servidor por meio das funcionalidades administrativas disponibilizadas pelo sistema
 - executar tarefas administrativas exclusivas
+- ativar e desativar o modo de manutenção
+- realizar operações administrativas independentemente das restrições aplicadas aos demais perfis
 
-A IA nunca deve conceder permissões acima do necessário para cada Role.
+O ROOT representa uma exceção deliberada à hierarquia convencional de permissões do sistema.
 
-Sempre aplicar o princípio do menor privilégio.
+O acesso técnico do ROOT deve ser restrito às funcionalidades administrativas implementadas e autorizadas pelo Aion. Isso não concede automaticamente acesso direto à infraestrutura, ao terminal, ao banco de dados ou às credenciais externas de hospedagem.
+
+Operações críticas devem respeitar as boas práticas de segurança, validação, auditoria e proteção da disponibilidade do sistema.
+
+A IA nunca deve conceder permissões de ROOT a outros usuários sem autorização explícita.
+
+Para os demais papéis, sempre aplicar o princípio do menor privilégio.
+
+---
+
+## Evolução das permissões
+
+As permissões descritas refletem as regras definidas para a primeira release do Aion.
+
+Com a evolução do sistema e a implementação de funcionalidades mais complexas, as permissões dos perfis SERVO e ANCIÃO poderão ser diferenciadas, ampliadas ou restringidas conforme as necessidades operacionais e as decisões de negócio.
+
+A IA não deve antecipar essas mudanças nem implementar restrições ou permissões futuras que ainda não tenham sido formalmente definidas.
 
 ---
 
@@ -279,7 +314,9 @@ SERVO possui acesso administrativo limitado.
 
 ANCIAO possui acesso administrativo completo sobre o domínio.
 
-ROOT possui acesso exclusivo às configurações globais do sistema.
+ROOT possui acesso aos recursos e funcionalidades do sistema.
+
+As verificações de propriedade devem respeitar as permissões de cada papel e as regras de negócio existentes.
 
 ---
 
@@ -311,7 +348,7 @@ Sempre utilizar tipagem explícita.
 
 Evitar:
 
-```
+```typescript
 any
 ```
 
@@ -329,7 +366,7 @@ Utilizar strict mode.
 
 Cada módulo deve possuir estrutura semelhante.
 
-```
+```text
 module/
 
 controllers/
@@ -372,15 +409,17 @@ Nunca apagar dados automaticamente.
 
 # Qualidade
 
-Antes de finalizar qualquer tarefa:
+Antes de finalizar qualquer tarefa, executar as verificações de qualidade.
 
 Executar:
 
-```
+```bash
+npm run lint
 npm run build
+npm run test
 ```
 
-Corrigir todos os erros de compilação.
+Corrigir todos os erros de lint e compilação.
 
 Sempre verificar:
 
@@ -388,12 +427,9 @@ Sempre verificar:
 - tipagem
 - lint
 - arquivos órfãos
+- testes relacionados às alterações
 
-Caso existam testes:
-
-```
-npm test
-```
+Caso existam testes, garantir que sejam executados e aprovados antes de finalizar a tarefa.
 
 ---
 
@@ -403,7 +439,7 @@ Assumir que o ambiente utiliza Docker Compose.
 
 Caso os containers não estejam iniciados:
 
-```
+```bash
 docker compose up -d
 ```
 

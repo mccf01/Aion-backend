@@ -1,4 +1,6 @@
-# Projeto Carrinho - Backend
+# Aion - Backend
+
+> Beyond the Ordinary
 
 Sistema backend para gerenciamento de escalas de Testemunho Público.
 
@@ -8,7 +10,7 @@ O projeto foi desenvolvido com foco em boas práticas de desenvolvimento, arquit
 
 # Objetivos
 
-O Projeto Carrinho tem como objetivo facilitar o gerenciamento das escalas de Testemunho Público de uma congregação, permitindo que administradores organizem programações, locais e voluntários de forma simples, segura e eficiente.
+O Aion tem como objetivo facilitar o gerenciamento das escalas de Testemunho Público de uma congregação, permitindo que administradores organizem programações, locais e voluntários de forma simples, segura e eficiente.
 
 Além das funcionalidades do sistema, o projeto busca demonstrar conhecimentos em:
 
@@ -56,17 +58,17 @@ O projeto utiliza uma arquitetura em camadas:
 
 ```text
 Routes
-    ↓
+   ↓
 Middlewares
-    ↓
+   ↓
 Controllers
-    ↓
+   ↓
 Services
-    ↓
+   ↓
 Repositories
-    ↓
+   ↓
 Prisma ORM
-    ↓
+   ↓
 PostgreSQL
 ```
 
@@ -180,8 +182,6 @@ npm run dev
 | `npm run clean:docker` | Remove volumes Docker não utilizados para liberar espaço em disco. |
 | `npm run clean:cache` | Remove caches desnecessários do Node.js. |
 | `npm run clean:all` | Executa uma limpeza completa, removendo os caches do Node.js e os volumes Docker não utilizados. |
-
-
 
 ---
 
